@@ -44,7 +44,7 @@ M = 2
 # Maximum rank:
 rmax = 10
 # Maximum number of retries:
-cmax = -1
+cmax = 0
 # Tolerance:
 tol = 0.99
 
