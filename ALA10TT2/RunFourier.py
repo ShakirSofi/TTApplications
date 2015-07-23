@@ -3,7 +3,8 @@ import numpy as np
 import pyemma.coordinates as pco
 
 import sys
-sys.path.append("/Users/fnueske/Documents/Uni/TensorTrain/")
+fundamental_path = "/storage/mi/pycon/"
+sys.path.append(fundamental_path + "TensorTrain/")
 import TensorTrain2.TTtensors as TT
 import TensorTrain2.ALSClass as ALS
 import TensorTrain2.ALSAlgo as ALM
@@ -16,7 +17,7 @@ d = 16
 ''' 2. Basis functions and directories:'''
 print "Preparing data:"
 # Path of basis evaluations:
-basispath = "/Users/fnueske/Documents/Uni/TTApplications/ALA10TT2/Evaluations/"
+basispath = fundamental_path + "TTApplications/ALA10TT2/Evaluations/"
 # Number of trajectories:
 ntraj = 6
 # List for basis readers:
@@ -30,9 +31,9 @@ for i in range(d):
     basis.append(ireader)
     
 # Define a directory for intermediate files, interfaces, and results:
-ifacedir = "/Users/fnueske/Documents/Uni//TTApplications/ALA10TT2/Interfaces/"
-ifilename = "/Users/fnueske/Documents/Uni/TTApplications/ALA10TT2/Intermediate/Intermediate"
-resdir = "/Users/fnueske/Documents/Uni/TTApplications/ALA10TT2/ResultsCG/"
+ifacedir = fundamental_path + "TTApplications/ALA10TT2/Interfaces/"
+ifilename = fundamental_path + "TTApplications/ALA10TT2/Intermediate/Intermediate"
+resdir = fundamental_path + "TTApplications/ALA10TT2/ResultsCG/"
 
 ''' 3. Computational Settings:'''
 # Lag time:
@@ -43,8 +44,6 @@ dt = 0.05
 M = 2
 # Maximum rank:
 rmax = 10
-# Maximum number of retries:
-cmax = 0
 # Tolerance:
 tol = 0.99
 
@@ -62,7 +61,7 @@ print "Create TT-tensor."
 # Create TT-object:        
 T = TT.BlockTTtensor(U,basis,M,ifacedir)
 # Create ALS object:
-A = ALS.ALS(tau,dt,M,ifilename,rmax,tol,cmax=cmax)
+A = ALS.ALS(tau,dt,M,ifilename,rmax,tol)
  
 ''' 5. Run Optimization:'''
 T,A = ALM.RunALS(T,A)
@@ -77,5 +76,7 @@ J_arr = A.J
 ts = A.ts
 np.savetxt(resdir+"Objectives.dat",J_arr)
 np.savetxt(resdir+"Timescales.dat",ts)
+# Extract the least-squares errors and save them:
+np.savetxt(resdir+"LSQErrors.dat",T.lse)
 # Compute the eigenfunctions:
 Ef = UT.EvalEigenfunctions(T,tau,resdir+"Eigenfunction")

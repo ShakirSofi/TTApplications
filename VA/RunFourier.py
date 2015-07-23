@@ -3,7 +3,8 @@ import numpy as np
 import pyemma.coordinates as pco
 
 import sys
-sys.path.append("/Users/fnueske/Documents/Uni/TensorTrain/")
+fundamental_path = "/storage/mi/pycon/"
+sys.path.append(fundamental_path + "TensorTrain/")
 import TensorTrain2.TTtensors as TT
 import TensorTrain2.ALSClass as ALS
 import TensorTrain2.ALSAlgo as ALM
@@ -16,7 +17,7 @@ d = 4
 ''' 2. Basis functions and directories:'''
 print "Preparing data:"
 # Path of basis evaluations:
-basispath = "/Users/fnueske/Documents/Uni/TTApplications/VA/Evaluations/"
+basispath = fundamental_path + "TTApplications/VA/Evaluations/"
 # Number of trajectories:
 ntraj = 4
 # List for basis readers:
@@ -30,9 +31,9 @@ for i in range(d):
     basis.append(ireader)
     
 # Define a directory for intermediate files, interfaces, and results:
-ifacedir = "/Users/fnueske/Documents/Uni/TTApplications/VA/Interfaces/"
-ifilename = "/Users/fnueske/Documents/Uni/TTApplications/VA/Intermediate/Intermediate"
-resdir = "/Users/fnueske/Documents/Uni//TTApplications/VA/ResultsCG/"
+ifacedir = fundamental_path + "TTApplications/VA/Interfaces/"
+ifilename = fundamental_path + "TTApplications/VA/Intermediate/Intermediate"
+resdir = fundamental_path + "TTApplications/VA/ResultsCG/"
 
 ''' 3. Computational Settings:'''
 # Lag time:
@@ -43,8 +44,6 @@ dt = 0.05
 M = 3
 # Maximum rank:
 rmax = 10
-# Maximum number of retries:
-cmax = 0
 # Tolerance:
 tol = 0.95
 
@@ -62,7 +61,7 @@ print "Create TT-tensor."
 # Create TT-object:        
 T = TT.BlockTTtensor(U,basis,M,ifacedir)
 # Create ALS object:
-A = ALS.ALS(tau,dt,M,ifilename,rmax,tol,cmax)
+A = ALS.ALS(tau,dt,M,ifilename,rmax,tol)
  
 ''' 5. Run Optimization:'''
 T,A = ALM.RunALS(T,A)
