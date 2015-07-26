@@ -3,7 +3,8 @@ import numpy as np
 import pyemma.coordinates as pco
 
 import sys
-sys.path.append("/storage/mi/pycon/TensorTrain/")
+fundamental_path = "/Users/fnueske/Documents/Uni/"
+sys.path.append(fundamental_path + "TensorTrain/")
 import TensorTrain2.TTtensors as TT
 import TensorTrain2.ALSClass as ALS
 import TensorTrain2.ALSAlgo as ALM
@@ -16,7 +17,7 @@ d = 258
 ''' 2. Basis functions and directories:'''
 print "Preparing data:"
 # Path of basis evaluations:
-basispath = "/storage/mi/pycon/TTApplications/BPTI_Contacts/Evaluations/"
+basispath = fundamental_path + "TTApplications/BPTI_Contacts/Evaluations/"
 # List for basis readers:
 basis = []
 for i in range(d):
@@ -28,9 +29,9 @@ for i in range(d):
     basis.append(ireader)
 
 # Define a directory for intermediate files, interfaces, and results:
-ifacedir = "/storage/mi/pycon/TTApplications/BPTI_Contacts/Interfaces/"
-ifilename = "/storage/mi/pycon/TTApplications/BPTI_Contacts/Intermediate/"
-resdir = "/storage/mi/pycon/TTApplications/BPTI_Contacts/Results_eps99CG/"
+ifacedir = fundamental_path + "TTApplications/BPTI_Contacts/Interfaces/"
+ifilename = fundamental_path + "TTApplications/BPTI_Contacts/Intermediate/"
+resdir = fundamental_path + "TTApplications/BPTI_Contacts/Results_eps99CG/"
 
 ''' 3. Computational Settings:'''
 # Lag time (5 microseconds):
@@ -41,8 +42,6 @@ dt = 0.025
 M = 2
 # Maximum rank:
 rmax = 10
-# Maximum number of retries:
-cmax = 0
 # Tolerance:
 tol = 0.99
 
@@ -61,7 +60,7 @@ print "Create TT-tensor."
 # Create TT-object:        
 T = TT.BlockTTtensor(U,basis,M,ifacedir)
 # Create ALS object:
-A = ALS.ALS(tau,dt,M,ifilename,rmax,tol,cmax=cmax)
+A = ALS.ALS(tau,dt,M,ifilename,rmax,tol)
  
 ''' 5. Run Optimization:'''
 T,A = ALM.RunALS(T,A)
@@ -76,8 +75,7 @@ J_arr = A.J
 ts = A.ts
 np.savetxt(resdir+"Objectives.dat",J_arr)
 np.savetxt(resdir+"Timescales.dat",ts)
-# Extract the retries:
-ret = A.retries
-np.savetxt(resdir+"Retries.dat",ret)
+# Extract the least-squares errors and save them:
+np.savetxt(resdir+"LSQErrors.dat",T.lse)
 # Compute the eigenfunctions:
 Ef = UT.EvalEigenfunctions(T,tau,resdir+"Eigenfunction")
