@@ -45,7 +45,9 @@ M = 2
 # Maximum rank:
 rmax = 10
 # Tolerance:
-tol = 0.99
+tol = 0.995
+# Set the CG-tolerance:
+gtol = 1e-4
 
 ''' 4. Define TT and ALS objects:'''
 # Initialise Components:
@@ -61,7 +63,7 @@ print "Create TT-tensor."
 # Create TT-object:        
 T = TT.BlockTTtensor(U,basis,M,ifacedir)
 # Create ALS object:
-A = ALS.ALS(tau,dt,M,ifilename,rmax,tol)
+A = ALS.ALS(tau,dt,M,ifilename,rmax,tol,gtol=gtol)
  
 ''' 5. Run Optimization:'''
 T,A = ALM.RunALS(T,A)
