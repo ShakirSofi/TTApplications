@@ -41,9 +41,9 @@ dt = 0.025
 # Number of eigenfunctions:
 M = 2
 # Maximum rank:
-rmax = 10
+rmax = 20
 # Tolerance:
-tol = 0.985
+tol = 0.99
 
     
 ''' 4. Define TT and ALS objects:'''
