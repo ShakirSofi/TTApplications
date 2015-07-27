@@ -31,7 +31,7 @@ for i in range(d):
 # Define a directory for intermediate files, interfaces, and results:
 ifacedir = fundamental_path + "TTApplications/BPTI_Contacts/Interfaces/"
 ifilename = fundamental_path + "TTApplications/BPTI_Contacts/Intermediate/"
-resdir = fundamental_path + "TTApplications/BPTI_Contacts/Results_eps99CG/"
+resdir = fundamental_path + "TTApplications/BPTI_Contacts/Results_eps99/"
 
 ''' 3. Computational Settings:'''
 # Lag time (5 microseconds):
