@@ -1,7 +1,8 @@
 import numpy as np
 
 import sys
-sys.path.append("/storage/mi/pycon/TensorTrain/")
+fundamental_path = "/storage/mi/pycon/"
+sys.path.append(fundamental_path + "TensorTrain/")
 import TensorTrain2.Util as UT
 
 ''' This script reads the torsion angle data for VA peptide, and evaluates
@@ -11,7 +12,7 @@ the Fourier basis functions for all data points.'''
 # Path where trajectory data is stored:
 trajpath = "/home/mi/vitalini/Systems/Dimers/ff_AMBER99SB_ILDN/Ac_VA_NHMe/analysis/"
 # Path where function evaluations are stored:
-datapath = "/storage/mi/pycon/TTApplications/VA/Evaluations/"
+datapath = fundamental_path + "TTApplications/VA/Evaluations/"
 
 
 ''' 2. Settings:'''
@@ -19,7 +20,7 @@ print "Loading trajectories."
 # Number of trajectories:
 ntraj = 4
 # Highest frequency of Fourier basis for each dihedral:
-nf = 3
+nf = 2
 # Set the number of coordinates:
 d = 4
 
