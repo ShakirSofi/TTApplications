@@ -2,22 +2,22 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Set the paths:
-fundamental_path = "/storage/mi/pycon/"
+fundamental_path = "/Users/fnueske/Documents/Uni/"
 resdir = fundamental_path + "TTApplications/VA/ResultsFull/"
 # Load the timescales:
 ts_full = np.loadtxt(resdir + "Timescales.dat")
 ts_msm = np.loadtxt(resdir + "Timescales_MSM.dat")
 ts_msm = 0.001*ts_msm
-taulist1 = ts_full[:,0]
-taulist2 = ts_msm[:,0]
+taulist1 = ts_full[:-1,0]
+taulist2 = ts_msm[:-1,0]
 
 ''' Timescale plot:'''
 plt.figure()
-plt.plot(taulist1,ts_full[:,2],"b--*",linewidth = 3,markersize = 12)
-plt.plot(taulist2,ts_msm[:,2],"b--o",linewidth = 3,markersize = 6)
+plt.plot(taulist1,ts_full[:-1,2],"b--*",linewidth = 3,markersize = 12)
+plt.plot(taulist2,ts_msm[:-1,2],"b--o",linewidth = 3,markersize = 6)
 
-plt.plot(taulist1,ts_full[:,1],"r--*",linewidth = 3,markersize=12)
-plt.plot(taulist2,ts_msm[:,1],"r--o",linewidth = 3,markersize = 6)
+plt.plot(taulist1,ts_full[:-1,1],"r--*",linewidth = 3,markersize=12)
+plt.plot(taulist2,ts_msm[:-1,1],"r--o",linewidth = 3,markersize = 6)
 
 plt.plot([],[],"k--*",linewidth=3,markersize=12,label=" ")
 plt.plot([],[],"k--o",linewidth=3,markersize=8,label=" ")
