@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 import sys
-fundamental_path = "/Users/fnueske/Documents/Uni/"
+fundamental_path = "/storage/mi/pycon/"
 sys.path.append(fundamental_path + "TensorTrain/")
 import TensorTrain2.Util as TTU
 
@@ -51,9 +51,15 @@ c = np.array([[-6.5],[0.2]])
 # Define allowed distance to the centers:
 di = np.array([1,0.5])
 # Number of frames per traj and center:
-nframes = None
+nframes = 200
+# Trajectory files:
+traj = [fundamental_path + "BPTI_CA/all.xtc"]
+# Topology:
+topfile = fundamental_path + "BPTI_CA/bpti_ca.pdb"
+# Filename:
+filename = resdir + "BPTI_995"
 # Write out trajs:
-indices = TTU.SaveEVFrames(dt,ev_traj,c,di,nframes=nframes)
+indices = TTU.SaveEVFrames(dt,ev_traj,c,di,traj,filename,topfile,nframes=nframes)
   
 ''' Check agreement between least-squares error and contact.'''
   
@@ -69,7 +75,7 @@ for i in range(nc):
     idata = data[ilist,:]
     # Compute the average value of each switching function:
     diff[i,:] = np.mean(idata,axis=0)
-    
+     
 # Compute the difference between the averages in absolute value:
 diff = np.abs(diff[1,:]-diff[0,:])
 # Save them to file:
@@ -78,12 +84,12 @@ np.savetxt(resdir + "DifferenceSwitchingFunction.dat",diff)
 lsq2 = np.zeros(d)
 lsq2[1:d-1] = lsq/np.max(lsq)
 np.savetxt(resdir + "LSQErrorNormalized.dat",lsq2)
-
+ 
 plt.figure()
-
+ 
 plt.subplot(2,1,1)
 plt.bar(np.arange(d), diff)
-
+ 
 plt.subplot(2,1,2)
 plt.semilogy(np.arange(d), lsq2,linestyle = 'None',marker='o',markersize=6)
 plt.savefig(resdir + "Comparison.pdf")
