@@ -50,9 +50,9 @@ gtol = 1e-4
 
 ''' Settings for experiments with least-squares error and contact difference:'''
 # Different cut-offs based on least-squares:
-cut_lsq = np.array([1e-6,1e-5,1e-4,1e-3,1e-2,1e-1])
+cut_lsq = np.array([1e-6,1e-5,1e-4,1e-3,5e-3,1e-2,5e-2,1e-1])
 # Different cut-offs based on contact difference:
-cut_diff = np.array([0.2,0.3,0.4,0.5,0.6,0.7,0.8])
+cut_diff = np.array([0.3,0.4,0.5,0.6,0.65,0.7,0.75,0.8])
 # Load the least-squares errors:
 lsq = np.loadtxt(fundamental_path + "TTApplications/BPTI_Contacts/Results_eps995/LSQErrorNormalized.dat")
 # Load the contact differences:
