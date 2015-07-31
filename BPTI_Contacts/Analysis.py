@@ -58,6 +58,8 @@ traj = [fundamental_path + "BPTI_CA/all.xtc"]
 topfile = fundamental_path + "BPTI_CA/bpti_ca.pdb"
 # Filename:
 filename = resdir + "BPTI_995"
+# Time-step:
+dt = 100
 # Write out trajs:
 indices = TTU.SaveEVFrames(dt,ev_traj,c,di,traj,filename,topfile,nframes=nframes)
   

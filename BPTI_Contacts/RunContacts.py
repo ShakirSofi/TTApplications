@@ -31,7 +31,7 @@ for i in range(d):
 # Define a directory for intermediate files, interfaces, and results:
 ifacedir = fundamental_path + "TTApplications/BPTI_Contacts/Interfaces/"
 ifilename = fundamental_path + "TTApplications/BPTI_Contacts/Intermediate/"
-resdir = fundamental_path + "TTApplications/BPTI_Contacts/Results_eps995/"
+resdir = fundamental_path + "TTApplications/BPTI_Contacts/Results_StopByDev/"
 
 
 ''' 3. Computational Settings:'''
@@ -47,6 +47,8 @@ rmax = 20
 tol = 0.995
 # Gradient tolerance:
 gtol = 1e-4
+# Stopping tolerance for ALS:
+eps_iter = 1e-2
 
     
 ''' 4. Define TT and ALS objects:'''
@@ -63,7 +65,7 @@ print "Create TT-tensor."
 # Create TT-object:        
 T = TT.BlockTTtensor(U,basis,M,ifacedir)
 # Create ALS object:
-A = ALS.ALS(tau,dt,M,ifilename,rmax,tol,gtol=gtol)
+A = ALS.ALS(tau,dt,M,ifilename,rmax,tol,gtol=gtol,eps_iter=eps_iter)
  
 ''' 5. Run Optimization:'''
 T,A = ALM.RunALS(T,A)
