@@ -3,7 +3,7 @@ import numpy as np
 import pyemma.coordinates as pco
 
 import sys
-fundamental_path = "/Users/fnueske/Documents/Uni/"
+fundamental_path = "/storage/mi/pycon/"
 sys.path.append(fundamental_path + "TensorTrain/")
 import TensorTrain2.TTtensors as TT
 import TensorTrain2.ALSClass as ALS
