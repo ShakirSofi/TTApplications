@@ -36,9 +36,9 @@ for m in range(nsweeps):
              marker=markers[q+1], markerfacecolor=colors[q+1],
              markersize=sizes[q+1], label=" ")
     q += 2
-# fig = plt.gca()
-# fig.axes.get_xaxis().set_ticklabels([])
-# fig.axes.get_yaxis().set_ticklabels([])
+fig = plt.gca()
+fig.axes.get_xaxis().set_ticklabels([])
+fig.axes.get_yaxis().set_ticklabels([])
 plt.legend(loc=4,frameon=False)
 plt.savefig(figdir+"Timescales.pdf")
 
@@ -58,9 +58,9 @@ xe = 0.5*(xe[:-1] + xe[1:])
 # Plot a log-scale histogram:
 plt.figure()
 plt.plot(xe, H, '--o', linewidth=3, markersize=8)
-# fig = plt.gca()
-# fig.axes.get_xaxis().set_ticklabels([])
-# fig.axes.get_yaxis().set_ticklabels([])
+fig = plt.gca()
+fig.axes.get_xaxis().set_ticklabels([])
+fig.axes.get_yaxis().set_ticklabels([])
 plt.savefig(figdir + "Histogram.pdf")
 
 ''' Contact Differences and LSQ Errors:'''
@@ -71,9 +71,9 @@ plt.figure()
 zero_ind = np.where(lsq == 0)[0]
 lsq[zero_ind] = 1e-16
 plt.semilogy(np.arange(d), lsq, linestyle = 'None', marker='o', markersize=10)
-# fig = plt.gca()
-# fig.axes.get_xaxis().set_ticklabels([])
-# fig.axes.get_yaxis().set_ticklabels([])
+fig = plt.gca()
+fig.axes.get_xaxis().set_ticklabels([])
+fig.axes.get_yaxis().set_ticklabels([])
 plt.savefig(figdir + "LSQError.pdf")
 
 ''' Reduced Models from LSQ Errors and Contact Differences:'''
@@ -82,9 +82,9 @@ ts_lsq = np.loadtxt(fundamental_path + "TTApplications/"+
                     "ALA10TT2/ResultsReduced/ResultsLSQ.dat")
 plt.figure()
 plt.semilogx(ts_lsq[2, :], ts_lsq[0, :], 'b--', linewidth=3, marker="o", markersize=8)
-#fig = plt.gca()
-#fig.axes.get_xaxis().set_ticklabels([])
-#fig.axes.get_yaxis().set_ticklabels([])
+fig = plt.gca()
+fig.axes.get_xaxis().set_ticklabels([])
+fig.axes.get_yaxis().set_ticklabels([])
 plt.savefig(figdir + "ReducedModels.pdf")
 
 plt.show()
