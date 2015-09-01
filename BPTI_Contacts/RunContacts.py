@@ -31,7 +31,7 @@ for i in range(d):
 # Define a directory for intermediate files, interfaces, and results:
 ifacedir = fundamental_path + "TTApplications/BPTI_Contacts/Interfaces/"
 ifilename = fundamental_path + "TTApplications/BPTI_Contacts/Intermediate/"
-resdir = fundamental_path + "TTApplications/BPTI_Contacts/Results_StopByDev/"
+resdir = fundamental_path + "TTApplications/BPTI_Contacts/ResultsCG_QR4Runs/"
 
 
 ''' 3. Computational Settings:'''
@@ -56,19 +56,19 @@ eps_iter = 1e-2
 U = []
 for i in range(d):
     if i == 0:
-        iU = np.zeros((1,basis[i].dimension(),1,M))
+        iU = np.zeros((1, basis[i].dimension(), 1, M))
     else:
-        iU = np.zeros((1,basis[i].dimension(),1))
-        iU[0,0,0] = 1
+        iU = np.zeros((1, basis[i].dimension(), 1))
+        iU[0, 0, 0] = 1
     U.append(iU)
 print "Create TT-tensor."
 # Create TT-object:        
-T = TT.BlockTTtensor(U,basis,M,ifacedir)
+T = TT.BlockTTtensor(U, basis, M, ifacedir)
 # Create ALS object:
-A = ALS.ALS(tau,dt,M,ifilename,rmax,tol,gtol=gtol,eps_iter=eps_iter)
+A = ALS.ALS(tau, dt, M, ifilename, rmax, tol, gtol=gtol, eps_iter=eps_iter)
  
 ''' 5. Run Optimization:'''
-T,A = ALM.RunALS(T,A)
+T,A = ALM.RunALS(T, A)
  
 ''' 6. Save the results: '''
 print "Save results."

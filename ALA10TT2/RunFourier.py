@@ -66,7 +66,7 @@ T = TT.BlockTTtensor(U,basis,M,ifacedir)
 A = ALS.ALS(tau,dt,M,ifilename,rmax,tol,gtol=gtol)
  
 ''' 5. Run Optimization:'''
-T,A = ALM.RunALS(T,A)
+T,A = ALM.RunALS(T, A)
  
 ''' 6. Save the results: '''
 print "Save results."
@@ -76,9 +76,9 @@ np.savetxt(resdir+"Ranks.dat",ranks)
 # Extract the objective values and timescales:
 J_arr = A.J
 ts = A.ts
-np.savetxt(resdir+"Objectives.dat",J_arr)
-np.savetxt(resdir+"Timescales.dat",ts)
+np.savetxt(resdir+"Objectives.dat", J_arr)
+np.savetxt(resdir+"Timescales.dat", ts)
 # Extract the least-squares errors and save them:
-np.savetxt(resdir+"LSQErrors.dat",T.lse)
+np.savetxt(resdir+"LSQErrors.dat", T.lse)
 # Compute the eigenfunctions:
-Ef = UT.EvalEigenfunctions(T,tau,resdir+"Eigenfunction")
+Ef = UT.EvalEigenfunctions(T, tau, resdir+"Eigenfunction")

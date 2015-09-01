@@ -11,37 +11,38 @@ import TensorTrain2.ALSAlgo as ALM
 
 ''' 1. General definitions:'''
 # Dimension:
-d = 258
+d = 16
  
 ''' 2. Basis functions and directories:'''
 print "Preparing data:"
-# Path of basis evaluations:
-basispath = fundamental_path + "TTApplications/BPTI_Contacts/Evaluations/"
+basispath = fundamental_path + "TTApplications/ALA10TT2/Evaluations/"
+# Number of trajectories:
+ntraj = 6
 # List for basis readers:
 basis = []
 for i in range(d):
     # Create list of evaluation files for this coordinate:
-    file_list = [basispath+"Basis%d.npy"%(i)]
+    file_list = [basispath+"Traj%d/Basis%d.npy"%(j,i) for j in range(ntraj)]
     # Create a reader for this basis:
-    ireader = pco.source(file_list,chunk_size=100000)
+    ireader = pco.source(file_list,chunk_size=50000)
     # Append it:
     basis.append(ireader)
 
 # Define a directory for intermediate files, interfaces, and results:
-ifacedir = fundamental_path + "TTApplications/BPTI_Contacts/Interfaces/"
-ifilename = fundamental_path + "TTApplications/BPTI_Contacts/Intermediate/"
-resdir = fundamental_path + "TTApplications/BPTI_Contacts/ResultsReduced/"
+ifacedir = fundamental_path + "TTApplications/ALA10TT2/Interfaces/"
+ifilename = fundamental_path + "TTApplications/ALA10TT2/Intermediate/"
+resdir = fundamental_path + "TTApplications/ALA10TT2/ResultsReduced/"
 
 
 ''' 3. Computational Settings:'''
 # Lag time (5 microseconds):
-tau = 200
+tau = 40
 # Physical time step:
-dt = 0.025
+dt = 0.05
 # Number of eigenfunctions:
 M = 2
 # Maximum rank:
-rmax = 20
+rmax = 10
 # Tolerance:
 tol = 0.995
 # Gradient tolerance:
@@ -49,10 +50,10 @@ gtol = 1e-4
 
 ''' Settings for experiments with least-squares error and contact difference:'''
 # Different cut-offs based on least-squares:
-cut_lsq = np.array([1e-6,1e-5,1e-4,1e-3,5e-3,1e-2,5e-2,1e-1])
+cut_lsq = np.array([1e-4, 1e-3, 1e-2, 1e-1, 2e-1])
 # Load the least-squares errors:
-lsq = np.loadtxt(fundamental_path + "TTApplications/BPTI_Contacts/ResultsCG_QR/LSQErrorNormalized.dat")
-    
+lsq = np.loadtxt(fundamental_path + "TTApplications/ALA10TT2/ResultsCG/LSQErrorNormalized.dat")
+
 ''' 4. Define TT and ALS objects:'''
 # Initialise Components:
 U = []
